@@ -1,6 +1,11 @@
 import sqlite3
 from hashlib import sha256
 
+# Entre a sua senha aqui.
+# Atenção essa senha, além de dar acesso a base de dados, será a chave de encriptção da mesma base de dados.
+# Modificando esta senha, toda a informação na base dados não estará correta, somente se a senha original for restaurada neste campo
+# você terá a informação original.
+
 ADMIN_PASSWORD = "senhamuitoforte"
 
 connect = input("Digite a senha administrativa:\n")
