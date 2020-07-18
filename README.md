@@ -13,7 +13,9 @@ d2a8116004294b7603acbea8fc372b9cdee3d7e9950d1efadd4fc0b0bb07eff4
 Use para criar e guardar senhas diversas:
 
 v = ver senha
+
 c = criar senha
+
 s = sair
 
 <h3>Inglês (English)</h3>
@@ -30,5 +32,7 @@ d2a8116004294b7603acbea8fc372b9cdee3d7e9950d1efadd4fc0b0bb07eff4
 Use to create and save different passwords:
 
 v = see password
+
 c = create password
+
 s = leave
