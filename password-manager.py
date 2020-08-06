@@ -1,22 +1,22 @@
 import sqlite3
 from hashlib import sha256
 
-# Entre a sua senha aqui.
-# Atenção essa senha, além de dar acesso a base de dados, será a chave de encriptção da mesma base de dados.
-# Modificando esta senha, toda a informação na base dados não estará correta, somente se a senha original for restaurada neste campo
-# você terá a informação original.
+# Enter your password here.
+# Attention this password, in addition to giving access to the database, will be the encryption key of the same database.
+# Changing this password, all information in the database will not be correct, only if the original password is restored in this field
+# you will have the original information.
 
-ADMIN_PASSWORD = "senhamuitoforte"
+ADMIN_PASSWORD = "verystrongpassword"
 
-connect = input("Digite a senha administrativa:\n")
+connect = input("Enter the administrative password:\n")
 
 while connect != ADMIN_PASSWORD:
-    print ('Senha incorreta!\nTente outra vez.')
-    connect = input("Digite a senha administrativa:\n")
+    print ('Incorrect password!\nTry again.')
+    connect = input("Enter the administrative password:\n")
     if connect == "q":
         break
 
-conn = sqlite3.connect('gerenciador_senhas.db')
+conn = sqlite3.connect('password_generator.db')
 
 def create_password(pass_key, service, admin_pass):
     return sha256(admin_pass.encode('utf-8') + service.lower().encode('utf-8') + pass_key.encode('utf-8')).hexdigest()[:15]
@@ -45,25 +45,25 @@ if connect == ADMIN_PASSWORD:
     try:
         conn.execute('''CREATE TABLE KEYS
             (PASS_KEY TEXT PRIMARY KEY NOT NULL);''')
-        print("Sua base de dados foi criada!\nQual senha você gostaria de guardar agora?")
+        print("Your database has been created!\nWhat password would you like to keep now?")
     except:
-        print("Voce já tem uma base de dados, o que você gostaria de fazer?")
+        print("You already have a database, what would you like to do?")
     
     
     while True:
         print("\n"+ "*"*15)
-        print("Comandos:")
-        print("s = Sair do programa")
-        print("v = Ver senha")
-        print("c = Criar uma senha")
+        print("Commands:")
+        print("e = Exit the program")
+        print("v = View password")
+        print("c = Create a password")
         print("*"*15)
         input_ = input(":")
 
-        if input_ == "s":
+        if input_ == "e":
             break
         if input_ == "c":
-            service = input("Essa senha vai ser para qual servico ou site?\n")
-            print("\n" + service.capitalize() + " senha criada:\n" + add_password(service, ADMIN_PASSWORD))
+            service = input("Which service or website will this password be for?\n")
+            print("\n" + service.capitalize() + " password created:\n" + add_password(service, ADMIN_PASSWORD))
         if input_ == "v":
-            service = input("Qual o nome do site/servico?\n")
-            print("\n" + service.capitalize() + " senha:\n"+get_password(ADMIN_PASSWORD, service))
+            service = input("What is the name of the site/service?\n")
+            print("\n" + service.capitalize() + " password:\n"+get_password(ADMIN_PASSWORD, service))
